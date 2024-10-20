@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://cxtpqlsp0rw4s"]
+[gd_scene load_steps=15 format=3 uid="uid://cxtpqlsp0rw4s"]
 
 [ext_resource type="PackedScene" uid="uid://c4bxj2e3gqiyk" path="res://scenes/player.tscn" id="1_cv5wb"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_d3k4m"]
 [ext_resource type="Texture2D" uid="uid://dgf5glk0hw3vm" path="res://assets/sprites/world_tileset.png" id="2_yy1mo"]
 [ext_resource type="PackedScene" uid="uid://ov6tk6ixnhya" path="res://scenes/platform.tscn" id="3_kw1jp"]
 [ext_resource type="PackedScene" uid="uid://l5yt2wj1w2oc" path="res://scenes/coin.tscn" id="4_hbmra"]
@@ -216,6 +217,10 @@ _data = {
 
 [node name="Game" type="Node2D"]
 
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_d3k4m")
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_8gdg0")
 format = 2
@@ -233,6 +238,16 @@ zoom = Vector2(4, 4)
 limit_bottom = 140
 limit_smoothed = true
 position_smoothing_enabled = true
+
+[node name="Score Label" type="Label" parent="Player/Camera2D"]
+unique_name_in_owner = true
+offset_left = -137.0
+offset_top = -77.0
+offset_right = -26.0
+offset_bottom = -67.0
+theme_override_fonts/font = ExtResource("7_8hydg")
+theme_override_font_sizes/font_size = 8
+text = "Coins Collected: 0"
 
 [node name="KillZone" parent="." instance=ExtResource("5_d7vn7")]
 
@@ -273,7 +288,9 @@ autoplay = "move"
 [node name="Slime2" parent="Enemy" instance=ExtResource("6_fftj5")]
 position = Vector2(747, 112)
 
-[node name="Label" type="Label" parent="."]
+[node name="Labels" type="Node" parent="."]
+
+[node name="Label" type="Label" parent="Labels"]
 offset_left = 37.0
 offset_top = 19.0
 offset_right = 125.0
